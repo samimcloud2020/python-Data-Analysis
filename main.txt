@@ -41,4 +41,15 @@ all_data['Price Each'] = pd.to_numeric(all_data['Price Each'])
 all_data['Sales'] = all_data['Quantity Ordered'] * all_data['Price Each']
 all_data.head()
 
+results = all_data.groupby('Month').sum() #groupby month data get
+results
+
+import matplotlib.pyplot as plt
+months = range(1,13) # 1 to 12
+plt.bar(months,results['Sales'])
+plt.xticks(months)
+plt.ylabel('Sales in USD ($)')
+plt.xlabel('Month Number')
+
+
 
