@@ -53,3 +53,10 @@ plt.xlabel('Month Number')
 plt.show()
 
 
+def get_city(address):
+    return address.split(',')[1]
+all_data['City'] = all_data['Purchase Address'].apply(lambda x : get_city(x))
+all_data.head()
+
+
+
