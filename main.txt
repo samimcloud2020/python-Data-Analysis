@@ -50,6 +50,6 @@ plt.bar(months,results['Sales'])
 plt.xticks(months)
 plt.ylabel('Sales in USD ($)')
 plt.xlabel('Month Number')
-
+plt.show()
 
 
