@@ -62,4 +62,44 @@ all_data.head()
 
 
 
+results = all_data.groupby('City').sum()
+results
+#cities = all_data['City'].unique()
+cities = [city for city, df in all_data.groupby('City')]
+plt.bar(cities, results['Sales'])
+plt.xticks(cities,rotation='vertical',size=10)
+plt.ylabel('Sales in USD ($)')
+plt.xlabel('Cities Name')
+plt.show()
+
+
+all_data['Order Date'] = pd.to_datetime(all_data['Order Date'])
+all_data.head()
+
+all_data['Hour'] = all_data['Order Date'].dt.hour
+all_data['Minute'] = all_data['Order Date'].dt.minute
+all_data.head()
+
+
+hours = [hour for hour, df in all_data.groupby('Hour')]
+plt.plot(hours,all_data.groupby(['Hour']).count())
+all_data.groupby(['Hour']).count()
+plt.xticks(hours)
+plt.grid()
+plt.xlabel('Hours')
+plt.ylabel('Numbers of Order')
+plt.show()
+
+
+df = all_data[all_data['Order ID'].duplicated(keep=False)]
+#df.head(20)
+df['Groupid'] = df.groupby('Order ID')['Product'].transform(lambda x: ','.join(x))
+#df.head()
+df = df[['Order ID','Groupid']].drop_duplicates()
+df.head()
+
+
+
+
+
 
