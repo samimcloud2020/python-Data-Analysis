@@ -25,8 +25,13 @@ nan_df.head()
 all_data = all_data.dropna(how='all')
 all_data.head()
 
-
+temp_df = all_data[all_data['Order Date'].str[0:2] == 'Or']
+temp_df.head()
+all_data = all_data[all_data['Order Date'].str[0:2] != 'Or']
+all_data.head()
 
 all_data['Month'] = all_data['Order Date'].str[0:2]
 all_data.head()
 all_data['Month'] = all_data['Month'].astype('int32')
+all_data.head()
+
