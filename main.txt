@@ -243,8 +243,8 @@ plt.ylabel('Sales in USD ($)')
 plt.xlabel('Cities Name')
 plt.show()
 ############################################################################################################################
-
-all_data['Order Date'] = pd.to_datetime(all_data['Order Date'])
+all_data['Order Date'] = pd.to_datetime(all_data['Order Date'], format='%d%b%Y:%H:%M:%S.%f')
+#all_data['Order Date'] = pd.to_datetime(all_data['Order Date'])
 all_data.head()
 
 all_data['Hour'] = all_data['Order Date'].dt.hour
