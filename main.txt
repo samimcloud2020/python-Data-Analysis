@@ -99,20 +99,21 @@ all_data.head()
 ####################################################################################################################
 temp_df = all_data[all_data['Order Date'].str[0:2] == 'Or']
 temp_df.head()
+###################################################################################################################
 all_data = all_data[all_data['Order Date'].str[0:2] != 'Or']
 all_data.head()
-
+####################################CREATE A COLUMN Month as int32#########################################################
 all_data['Month'] = all_data['Order Date'].str[0:2]
 all_data.head()
 all_data['Month'] = all_data['Month'].astype('int32')
 all_data.head()
-
+###########COLUMN Quantity Ordered, Price Each, Sales to make numeric and multiply(so need same datatype)##########
 
 all_data['Quantity Ordered'] = pd.to_numeric(all_data['Quantity Ordered'])
 all_data['Price Each'] = pd.to_numeric(all_data['Price Each'])
 all_data['Sales'] = all_data['Quantity Ordered'] * all_data['Price Each']
 all_data.head()
-
+##############################################################################################################
 results = all_data.groupby('Month').sum() #groupby month data get
 results
 
