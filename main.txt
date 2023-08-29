@@ -263,9 +263,48 @@ Order ID	Product	Quantity Ordered	Price Each	Order Date	Purchase Address	Month	S
 all_data['Hour'] = all_data['Order Date'].dt.hour
 all_data['Minute'] = all_data['Order Date'].dt.minute
 all_data.head()
-
-
+##############################################################################################################################
+Order ID	Product	Quantity Ordered	Price Each	Order Date	Purchase Address	Month	Sales	City	Hour	Minute
+0	259358	34in Ultrawide Monitor	1	379.99	2019-10-28 10:56:00	609 Cherry St, Dallas, TX 75001	10	379.99	Dallas (TX)	10	56
+1	259359	27in 4K Gaming Monitor	1	389.99	2019-10-28 17:26:00	225 5th St, Los Angeles, CA 90001	10	389.99	Los Angeles (CA)	17	26
+2	259360	AAA Batteries (4-pack)	2	2.99	2019-10-24 17:20:00	967 12th St, New York City, NY 10001	10	5.98	New York City (NY)	17	20
+3	259361	27in FHD Monitor	1	149.99	2019-10-14 22:26:00	628 Jefferson St, New York City, NY 10001	10	149.99	New York City (NY)	22	26
+4	259362	Wired Headphones	1	11.99	2019-10-07 16:10:00	534 14th St, Los Angeles, CA 90001	10	11.99	Los Angeles (CA)	16	10
+###############################################################################################################################
 hours = [hour for hour, df in all_data.groupby('Hour')]
+print(hours)
+##############################################################################################################################
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+##############################################################################################################################
+print(all_data.groupby(['Hour']).count())
+############################################################################################################################
+     Order ID  Product  Quantity Ordered  Price Each  Order Date  \
+Hour                                                                
+0         3910     3910              3910        3910        3910   
+1         2350     2350              2350        2350        2350   
+2         1243     1243              1243        1243        1243   
+3          831      831               831         831         831   
+4          854      854               854         854         854   
+5         1321     1321              1321        1321        1321   
+6         2482     2482              2482        2482        2482   
+7         4011     4011              4011        4011        4011   
+8         6256     6256              6256        6256        6256   
+9         8748     8748              8748        8748        8748   
+10       10944    10944             10944       10944       10944   
+11       12411    12411             12411       12411       12411   
+12       12587    12587             12587       12587       12587   
+13       12129    12129             12129       12129       12129   
+14       10984    10984             10984       10984       10984   
+15       10175    10175             10175       10175       10175   
+16       10384    10384             10384       10384       10384   
+17       10899    10899             10899       10899       10899   
+18       12280    12280             12280       12280       12280   
+19       12905    12905             12905       12905       12905   
+20       12228    12228             12228       12228       12228   
+21       10921    10921             10921       10921       10921   
+22        8822     8822              8822        8822        8822   
+23        6275     6275              6275        6275        6275   
+###########################################################################################################
 plt.plot(hours,all_data.groupby(['Hour']).count())
 all_data.groupby(['Hour']).count()
 plt.xticks(hours)
@@ -273,17 +312,65 @@ plt.grid()
 plt.xlabel('Hours')
 plt.ylabel('Numbers of Order')
 plt.show()
-
+#############################################################################################################
 
 df = all_data[all_data['Order ID'].duplicated(keep=False)]
-#df.head(20)
+df.head(20)
+###############################################################################################################
+Order ID	Product	Quantity Ordered	Price Each	Order Date	Purchase Address	Month	Sales	City	Hour	Minute
+62	259420	Google Phone	1	600.00	2019-10-18 08:54:00	791 Forest St, Los Angeles, CA 90001	10	600.00	Los Angeles (CA)	8	54
+63	259420	USB-C Charging Cable	2	11.95	2019-10-18 08:54:00	791 Forest St, Los Angeles, CA 90001	10	23.90	Los Angeles (CA)	8	54
+65	259422	Google Phone	1	600.00	2019-10-05 04:53:00	849 Ridge St, San Francisco, CA 94016	10	600.00	San Francisco (CA)	4	53
+66	259422	USB-C Charging Cable	1	11.95	2019-10-05 04:53:00	849 Ridge St, San Francisco, CA 94016	10	11.95	San Francisco (CA)	4	53
+82	259438	iPhone	1	700.00	2019-10-29 09:47:00	176 5th St, Los Angeles, CA 90001	10	700.00	Los Angeles (CA)	9	47
+83	259438	Lightning Charging Cable	1	14.95	2019-10-29 09:47:00	176 5th St, Los Angeles, CA 90001	10	14.95	Los Angeles (CA)	9	47
+####################################################################################################################################
 df['Groupid'] = df.groupby('Order ID')['Product'].transform(lambda x: ','.join(x))
-#df.head()
+df.head()
+######################################################################################################################################
+Order ID	Product	Quantity Ordered	Price Each	Order Date	Purchase Address	Month	Sales	City	Hour	Minute	Groupid
+62	259420	Google Phone	1	600.00	2019-10-18 08:54:00	791 Forest St, Los Angeles, CA 90001	10	600.00	Los Angeles (CA)	8	54	Google Phone,USB-C Charging Cable
+63	259420	USB-C Charging Cable	2	11.95	2019-10-18 08:54:00	791 Forest St, Los Angeles, CA 90001	10	23.90	Los Angeles (CA)	8	54	Google Phone,USB-C Charging Cable
+###########################################################################################################################################
 df = df[['Order ID','Groupid']].drop_duplicates()
 df.head()
-
-
-
+###########################################################################################################################################
+Order ID	Groupid
+62	259420	Google Phone,USB-C Charging Cable
+65	259422	Google Phone,USB-C Charging Cable
+82	259438	iPhone,Lightning Charging Cable
+103	259458	34in Ultrawide Monitor,ThinkPad Laptop
+123	259477	LG Dryer,AAA Batteries (4-pack)
+##########################################DROP CLOUMN ORDER DATE###############################################################################################
+all_data_new  = all_data.drop(columns = ['Order Date'])
+all_data_new.head()
+##########################################################################################################################################################
+product_group = all_data_new.groupby('Product').sum()
+product_group
+##########################################################################################################################################
+	Order ID	Quantity Ordered	Price Each	Purchase Address	Month	Sales	City	Hour	Minute
+Product									
+20in Monitor	2593702594462594792595512596612597322597472598...	4129	451068.99	528 Forest St, San Francisco, CA 94016796 Wash...	29336	454148.71	San Francisco (CA) Los Angeles (CA) Atlanta...	58764	122252
+27in 4K Gaming Monitor	2593592593792594002594262594852595482595702595...	6244	2429637.70	225 5th St, Los Angeles, CA 90001148 Lincoln S...	44440	2435097.56	Los Angeles (CA) San Francisco (CA) Los Ang...	90916	184331
+27in FHD Monitor	2593612593682593732593762594092594312594472594...	7550	1125974.93	628 Jefferson St, New York City, NY 10001960 R...	52558	1132424.50	New York City (NY) Boston (MA) San Francisc...	107540	219948
+##################################################################################################################################
+quantity_ordered = product_group['Quantity Ordered']
+quantity_ordered.head()
+##################################################################################################################################
+Product
+20in Monitor               4129
+27in 4K Gaming Monitor     6244
+27in FHD Monitor           7550
+34in Ultrawide Monitor     6199
+AA Batteries (4-pack)     27635
+Name: Quantity Ordered, dtype: int64
+############################################################################################################################
+products = [product for product, df in product_group]
+plt.bar(products, quantity_ordered)
+plt.xticks(products,rotation='vertical',size=8)
+plt.ylabel('Quantity Ordered')
+plt.xlabel('Products')
+plt.show()
 
 
 
