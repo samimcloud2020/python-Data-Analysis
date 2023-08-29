@@ -137,7 +137,41 @@ plt.ylabel('Sales in USD ($)')
 plt.xlabel('Month Number')
 plt.show()
 
+###############################################################################################################
+txt = "hello, my name is Peter, I am 26 years old"
 
+x = txt.split(", ")
+
+print(x)
+
+['hello', 'my name is Peter', 'I am 26 years old']
+-------------------------------------------------------------------
+txt = "apple#banana#cherry#orange"
+
+x = txt.split("#")
+
+print(x)
+
+['apple', 'banana', 'cherry', 'orange']
+----------------------------------------------------------------------
+txt = "welcome to the jungle"
+
+x = txt.split()
+
+print(x)
+
+['welcome', 'to', 'the', 'jungle']
+----------------------------------------------------------------------
+txt = "apple#banana#cherry#orange"
+
+# setting the maxsplit parameter to 1, will return a list with 2 elements!
+x = txt.split("#", 1)
+
+print(x)
+
+['apple', 'banana#cherry#orange']
+
+#############################################################################################################
 def get_city(address):
     return address.split(',')[1]
 def get_state(address):
