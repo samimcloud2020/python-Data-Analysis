@@ -114,9 +114,21 @@ all_data['Price Each'] = pd.to_numeric(all_data['Price Each'])
 all_data['Sales'] = all_data['Quantity Ordered'] * all_data['Price Each']
 all_data.head()
 ##############################################################################################################
+Use DataFrame.groupby().sum() to group rows based on one or multiple columns and calculate sum agg function. 
+
+groupby() function returns a DataFrameGroupBy object which contains an aggregate function sum() to calculate 
+a sum of a given column for each group.
+
+	Order ID	Product	Quantity Ordered	Price Each	Order Date	Purchase Address	Sales
+Month							
+1	1412341412351412361412371412381412391412401412...	iPhoneLightning Charging CableWired Headphones...	10903	1811768.38	01/22/19 21:2501/28/19 14:1501/17/19 13:3301/0...	944 Walnut St, Boston, MA 02215185 Maple St, P...	1822256.73
+2	1505021505031505041505051505061505071505081505...	iPhoneAA Batteries (4-pack)27in 4K Gaming Moni...	13449	2188884.72	02/18/19 01:3502/13/19 07:2402/18/19 09:4602/0...	866 Spruce St, Portland, ME 0410118 13th St, S...	2202022.42
+3	1620091620091620091620101620111620121620131620...	iPhoneLightning Charging CableWired Headphones...	17005	2791207.83	03/28/19 20:5903/28/19 20:5903/28/19 20:5903/1...	942 Church St, Austin, TX 73301942 Church St, ...	2807100.38
+4	1765581765591765601765601765611765621765631765...	USB-C Charging CableBose SoundSport Headphones...	20558	3367671.02	04/19/19 08:4604/07/19 22:3004/12/19 14:3804/1...	917 1st St, Dallas, TX 75001682 Chestnut St, B...	3390670.24
+##############################################################################################################
 results = all_data.groupby('Month').sum() #groupby month data get
 results
-
+#############################################################################################################
 import matplotlib.pyplot as plt
 months = range(1,13) # 1 to 12
 plt.bar(months,results['Sales'])
