@@ -243,10 +243,23 @@ plt.ylabel('Sales in USD ($)')
 plt.xlabel('Cities Name')
 plt.show()
 ############################################################################################################################
-all_data['Order Date'] = pd.to_datetime(all_data['Order Date'], format='%d%b%Y:%H:%M:%S.%f')
-#all_data['Order Date'] = pd.to_datetime(all_data['Order Date'])
+all_data['Order Date'] = pd.to_datetime(all_data['Order Date'], format='mixed')
 all_data.head()
+######################################existing#########################################################################
+04/19/19 08:46
+#########################################convert#############################################################################
+Order ID	Product	Quantity Ordered	Price Each	Order Date	Purchase Address	Month	Sales	City
+0	176558	USB-C Charging Cable	2	11.95	2019-04-19 08:46:00	917 1st St, Dallas, TX 75001	4	23.90	Dallas (TX)
+2	176559	Bose SoundSport Headphones	1	99.99	2019-04-07 22:30:00	682 Chestnut St, Boston, MA 02215	4	99.99	Boston (MA)
+3	176560	Google Phone	1	600.00	2019-04-12 14:38:00	669 Spruce St, Los Angeles, CA 90001	4	600.00	Los Angeles (CA)
+4	176560	Wired Headphones	1	11.99	2019-04-12 14:38:00	669 Spruce St, Los Angeles, CA 90001	4	11.99	Los Angeles (CA)
+5	176561	Wired Headphones	1	11.99	2019-04-30 09:27:00	333 8th St, Los Angeles, CA 90001	4	11.99	Los Angeles (CA)
+############################################################################################################################
 
+#all_data['Order Date'] = pd.to_datetime(all_data['Order Date'], format='%d%b%Y:%H:%M:%S.%f')
+#all_data['Order Date'] = pd.to_datetime(all_data['Order Date'])
+#all_data.head()
+###############################################################################################################################
 all_data['Hour'] = all_data['Order Date'].dt.hour
 all_data['Minute'] = all_data['Order Date'].dt.minute
 all_data.head()
