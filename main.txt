@@ -223,16 +223,26 @@ all_data.head()
 is a "list comprehension". It means something like "for each x in text, if x.isdigit() is True, add it to the list
 ##################################################################################################################
 results = all_data.groupby('City').sum()
-results
+results.head()
+################################################################################################################
+	Order ID	Product	Quantity Ordered	Price Each	Order Date	Purchase Address	Month	Sales
+City								
+Atlanta (GA)	1765641765711765821765891766231766271766341766...	USB-C Charging CableLightning Charging CableBo...	16602	2779908.20	04/12/19 10:5804/19/19 14:2904/27/19 12:2004/0...	790 Ridge St, Atlanta, GA 30301253 Johnson St,...	104794	2795498.58
+Austin (TX)	1765911766091766741766771766861767011767051767...	Apple Airpods HeadphonesApple Airpods Headphon...	11153	1809873.61	04/21/19 07:2104/11/19 16:5904/20/19 20:5304/0...	600 Maple St, Austin, TX 73301267 11th St, 
+########################################################################################################################
 #cities = all_data['City'].unique()
 cities = [city for city, df in all_data.groupby('City')]
 print(cities)
+########################################################################################################################
+[' Atlanta  (GA)', ' Austin  (TX)', ' Boston  (MA)', ' Dallas  (TX)', ' Los Angeles  (CA)', ' New York City  (NY)', ' Portland  (ME)', ' Portland  (OR)', ' San Francisco  (CA)', ' Seattle  (WA)']
+#########################################################################################################################
+
 plt.bar(cities, results['Sales'])
 plt.xticks(cities,rotation='vertical',size=10)
 plt.ylabel('Sales in USD ($)')
 plt.xlabel('Cities Name')
 plt.show()
-
+############################################################################################################################
 
 all_data['Order Date'] = pd.to_datetime(all_data['Order Date'])
 all_data.head()
