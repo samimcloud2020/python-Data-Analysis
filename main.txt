@@ -3,7 +3,7 @@ import os
 
 ################################################################################
 #READ CSV FILE FROM DIR
-df = pd.read_csv("./Sales_Data/Sales_April_2019.csv")
+df = pd.read_csv("./Sales_Data1/Sales_April_2019.csv")
 df.head()
 
 ##########################"list comprehension"#########################################################
@@ -81,12 +81,22 @@ all_data = pd.read_csv("all_data.csv")          #read  CSV file
 all_data                                 #849631 rows × 6 columns
 
 #################################### CLEANING NAN ###############################################################
-
-nan_df = all_data[all_data.isna().any(axis=1)]
+isna(). any() . This will check all of our columns and return True if there are any missing values or NaN s,
+or False if there are no missing values.
+###################################yes NAN PRESENT###############################################################################
+nan_df = all_data[all_data.isna().any(axis=1)]  #axis=0 row, axis=1 column
 nan_df.head()
+######################################################################################################################
+how{‘any’, ‘all’}, default ‘any’
+Determine if row or column is removed from DataFrame, when we have at least one NA or all NA.
+
+‘any’ : If any NA values are present, drop that row or column.
+
+‘all’ : If all values are NA, drop that row or column.
+##################################DROP NAN ROW OR COL####################################################
 all_data = all_data.dropna(how='all')
 all_data.head()
-
+####################################################################################################################
 temp_df = all_data[all_data['Order Date'].str[0:2] == 'Or']
 temp_df.head()
 all_data = all_data[all_data['Order Date'].str[0:2] != 'Or']
