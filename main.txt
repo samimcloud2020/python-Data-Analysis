@@ -172,6 +172,45 @@ print(x)
 ['apple', 'banana#cherry#orange']
 
 #############################################################################################################
+lambda arguments : expression   
+A lambda function can take any number of arguments, but can only have one expression.
+---------------------------------------------
+#Add 10 to argument a, and return the result:
+x = lambda a : a + 10
+print(x(5))
+
+15
+-------------------------------
+x = lambda a, b : a * b
+print(x(5, 6))
+
+30
+------------------------------------
+def myfunc(n):
+  return lambda a : a * n
+
+mydoubler = myfunc(2)
+
+print(mydoubler(11))
+
+22
+------------------------------
+DataFrame.apply(func, axis=0, raw=False, result_type=None, args=(), **kwargs)
+Apply a function along an axis of the DataFrame.
+
+funcfunction
+Function to apply to each column or row.
+
+axis{0 or ‘index’, 1 or ‘columns’}, default 0
+Axis along which the function is applied:
+
+0 or ‘index’: apply function to each column.
+
+1 or ‘columns’: apply function to each row.
+
+
+
+##############################################################################################################
 def get_city(address):
     return address.split(',')[1]
 def get_state(address):
