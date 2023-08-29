@@ -218,10 +218,15 @@ def get_state(address):
 all_data['City'] = all_data['Purchase Address'].apply(lambda x : f"{get_city(x)}  ({get_state(x)})")
 all_data.head()
 #################################################################################################################
+[x for x in text if x.isdigit()]
+
+is a "list comprehension". It means something like "for each x in text, if x.isdigit() is True, add it to the list
+##################################################################################################################
 results = all_data.groupby('City').sum()
 results
 #cities = all_data['City'].unique()
 cities = [city for city, df in all_data.groupby('City')]
+print(cities)
 plt.bar(cities, results['Sales'])
 plt.xticks(cities,rotation='vertical',size=10)
 plt.ylabel('Sales in USD ($)')
