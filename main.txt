@@ -345,8 +345,8 @@ Order ID	Groupid
 all_data_new  = all_data.drop(columns = ['Order Date'])
 all_data_new.head()
 ##########################################################################################################################################################
-product_group = all_data_new.groupby('Product').sum()
-product_group
+product_group = all_data_new.groupby('Product')
+product_group.sum()
 ##########################################################################################################################################
 	Order ID	Quantity Ordered	Price Each	Purchase Address	Month	Sales	City	Hour	Minute
 Product									
@@ -354,7 +354,7 @@ Product
 27in 4K Gaming Monitor	2593592593792594002594262594852595482595702595...	6244	2429637.70	225 5th St, Los Angeles, CA 90001148 Lincoln S...	44440	2435097.56	Los Angeles (CA) San Francisco (CA) Los Ang...	90916	184331
 27in FHD Monitor	2593612593682593732593762594092594312594472594...	7550	1125974.93	628 Jefferson St, New York City, NY 10001960 R...	52558	1132424.50	New York City (NY) Boston (MA) San Francisc...	107540	219948
 ##################################################################################################################################
-quantity_ordered = product_group['Quantity Ordered']
+quantity_ordered = product_group.sum()['Quantity Ordered']
 quantity_ordered.head()
 ##################################################################################################################################
 Product
@@ -371,6 +371,19 @@ plt.xticks(products,rotation='vertical',size=8)
 plt.ylabel('Quantity Ordered')
 plt.xlabel('Products')
 plt.show()
+#######################################################################################################################
+prices = all_data_new.groupby('Product').mean(numeric_only=True)['Price Each']
+print(prices)
 
+flg, ax1 = plt.subplots()
+ax2 = ax1.twinx()
+ax1.bar(products,quantity_ordered,color='g')
+ax2.plot(products,prices, 'b-')
 
+ax1.set_xlabel('product name')
+ax1.set_ylabel('quantity ordered', color='g')
+ax2.set_ylabel('price {$}',color='b')
+ax1.set_xticklabels('products',rotation='vertical',size=8)
+
+plt.show()
 
