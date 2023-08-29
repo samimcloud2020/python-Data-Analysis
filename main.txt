@@ -1,24 +1,86 @@
 import pandas as pd
 import os
 
-
-
+################################################################################
+#READ CSV FILE FROM DIR
 df = pd.read_csv("./Sales_Data/Sales_April_2019.csv")
 df.head()
 
+##########################"list comprehension"#########################################################
+S = [x**2 for x in range(10)]
+V = [2**i for i in range(13)]
+M = [x for x in S if x % 2 == 0]
 
+print(S) 
+print(V)
+print(M)
 
-files = [file for file in os.listdir('./Sales_Data')]
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+[1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+[0, 4, 16, 36, 64]
+#####################################################################################
+#os.listdir() method in python is used to get the list of all files and directories in the specified directory. 
+#If we don’t specify any directory, then list of files and directories in the current working directory will be returned.
+#Syntax: os.listdir(path)
+#Return Type: This method returns the list of all files and directories in the specified path. The return type of this method is list.
+############################################################################################################
+import os
+files = [file for file in os.listdir('./Sales_Data1') if not file.startswith('.')]
 print(files)         
 all_months_data = pd.DataFrame()
-for file in files:
-    df = pd.read_csv("./Sales_Data/" + file)
+print(type(all_months_data))     #<class 'pandas.core.frame.DataFrame'>
+
+
+#########################################################################################################
+for file in files:    #files is a list 
+    print(file)
+    print("./Sales_Data1/" + file)
+    df = pd.read_csv("./Sales_Data1/" + file)
+    print(type(df))
     all_months_data = pd.concat([all_months_data,df])
-all_months_data.to_csv("all_data.csv", index=False)
-all_data = pd.read_csv("all_data.csv")          #converts DataFrame into CSV data
-all_data                                 #[186850 rows x 6 columns]
+########################################################################################################
+Sales_October_2019.csv
+./Sales_Data1/Sales_October_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_January_2019.csv
+./Sales_Data1/Sales_January_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_February_2019.csv
+./Sales_Data1/Sales_February_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_June_2019.csv
+./Sales_Data1/Sales_June_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_March_2019.csv
+./Sales_Data1/Sales_March_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_August_2019.csv
+./Sales_Data1/Sales_August_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_September_2019.csv
+./Sales_Data1/Sales_September_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_April_2019.csv
+./Sales_Data1/Sales_April_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_July_2019.csv
+./Sales_Data1/Sales_July_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_December_2019.csv
+./Sales_Data1/Sales_December_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_May_2019.csv
+./Sales_Data1/Sales_May_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+Sales_November_2019.csv
+./Sales_Data1/Sales_November_2019.csv
+<class 'pandas.core.frame.DataFrame'>
+#######################################################################################################
+all_months_data.to_csv("all_data.csv", index=False)  #convert DataFrame to csv
+all_data = pd.read_csv("all_data.csv")          #read  CSV file
+all_data                                 #849631 rows × 6 columns
 
-
+#################################### CLEANING NAN ###############################################################
 
 nan_df = all_data[all_data.isna().any(axis=1)]
 nan_df.head()
