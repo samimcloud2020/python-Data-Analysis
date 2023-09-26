@@ -1,1 +1,11 @@
+######################What is the coefficient of determination?#######################################################
+The coefficient of determination (R²) measures how well a statistical model predicts an outcome.
+The outcome is represented by the model’s dependent variable.
 
+The lowest possible value of R² is 0 and the highest possible value is 1. 
+
+Put simply, the better a model is at making predictions, the closer its R² will be to 1.
+#######################################################################################################################
+
+ 
+​
